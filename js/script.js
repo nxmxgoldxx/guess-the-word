@@ -31,7 +31,6 @@ guessLetterButton.addEventListener("click", function (e) {
     // Lets grab what was entered
     const guess = letterInput.value;
     // console.log(guess);
-    const goodGuess = letterInput.value;
     const goodGuess = validateInput(guess);
 
     if (goodGuess) {
