@@ -1,9 +1,9 @@
-const guessLettersList = document.querySelector ('.guess-letters');
+const guessedLettersElement = document.querySelector('.guess-letters');
 const guessLetterButton = document.querySelector('.guess');
 const letterInput = document.querySelector('.letter');
 const wordInProgress = document.querySelector('.word-in-progress');
-const remainingGuesses = document.querySelector('.guess-remaining');
-const remainingGuessLetters = document.querySelector('.guess-remaining-span');
+const remainingGuessesElement = document.querySelector('.guess-remaining');
+const remainingGuessSpan = document.querySelector('.guess-remaining-span');
 const message = document.querySelector('.messages')
 const playAgainButton = document.querySelector('.play-again');
 
@@ -59,18 +59,20 @@ guessLetterButton.addEventListener("click", function (e) {
 }; 
 
 const makeGuess = function (guess) {
-    guess = guess.UpperCase();
+    guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
         message.innerText = "You have guess that previously";
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
-    }
+        showGuessedLetters();
+        updateWordInProgress(guessedLetters);
+        }
     };
 
-const displayGuestLetters = function () {
+const showGuestLetters = function () {
     // Clear line 1
-    guessedLettersList.innerText = "";
+    guessedLettersElement.innerText = "";
     for (const letter of guessedLetters) {
         const li = document.createElement("li");
         guessedLettersList.append(li);
