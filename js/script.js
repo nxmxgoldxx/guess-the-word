@@ -1,15 +1,15 @@
-const guessedLettersElement = document.querySelector('.guess-letters');
+const guessedLettersElement = document.querySelector('.guessed-letters');
 const guessLetterButton = document.querySelector('.guess');
 const letterInput = document.querySelector('.letter');
 const wordInProgress = document.querySelector('.word-in-progress');
-const remainingGuessesElement = document.querySelector('.guess-remaining');
-const remainingGuessSpan = document.querySelector('.guess-remaining-span');
-const message = document.querySelector('.messages')
+const remainingGuessesElement = document.querySelector('.remaining');
+const remainingGuessSpan = document.querySelector('.remaining-span');
+const message = document.querySelector('.message')
 const playAgainButton = document.querySelector('.play-again');
 
 const word = "magnolia";
 const guessedLetters = [];
-
+let remainingGuesses = 8;
 
 // Placeholder for the guessed words letters 
 
@@ -48,7 +48,7 @@ guessLetterButton.addEventListener("click", function (e) {
         message.innerText = "Make an entry.";
     } else if  (input.length > 1) {
         // More than one letter entered ?
-        message.innerText = ("Only a single letter, please.")
+        message.innerText = "Only a single letter, please."
     } else if (!input.match(acceptedLetter))  {     
         // Numbers and/or Special Characters are not allowed.
         message.innerText = "Enter any letter from A to Z";
@@ -70,7 +70,7 @@ const makeGuess = function (guess) {
         }
     };
 
-const showGuestLetters = function () {
+const showGuessedLetters = function () {
     // Clear line 1
     guessedLettersElement.innerText = "";
     for (const letter of guessedLetters) {
@@ -80,7 +80,7 @@ const showGuestLetters = function () {
 };
 
 
-    const guessedWordsUpdater = function (guessedLetters) {
+    const updateWordInProgress = function (guessedLetters) {
     const wordUpper = word.toUpperCase();
     const wordArray =wordUpper.split("");
     const revealWord = [];
@@ -96,7 +96,7 @@ const showGuestLetters = function () {
     confirmWin();
 };
 
-confirmWin = function () {
+const confirmWin = function () {
 
 if (word.toUpperCase() === wordInProgress.innerText) {
 message.classList.add("win");
