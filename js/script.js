@@ -36,7 +36,7 @@ const placeholder = function (word) {
     wordInProgress.innerText = placeholderLetters.join("");
     };
 
-placeholder(word);
+// placeholder(word);
 
 guessLetterButton.addEventListener("click", function (e) {
     e.preventDefault();
