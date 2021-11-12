@@ -3,12 +3,12 @@ const guessLetterButton = document.querySelector('.guess');
 const letterInput = document.querySelector('.letter');
 const wordInProgress = document.querySelector('.word-in-progress');
 const remainingGuessesElement = document.querySelector('.remaining');
-const remainingGuessSpan = document.querySelector('.remaining span');
+const remainingGuessesSpan = document.querySelector('.remaining span');
 const message = document.querySelector('.message')
 const playAgainButton = document.querySelector('.play-again');
 
-const word = "magnolia";
-const guessedLetters = [];
+let word = "magnolia";
+let guessedLetters = [];
 let remainingGuesses = 8;
 
 const getWord = async function () {
@@ -28,7 +28,7 @@ getWord();
 const placeholder = function (word) {
     const placeholderLetters = [];
     for (const letter of word) {
-        console.log(letter);
+       // console.log(letter);
         placeholderLetters.push("●");
     }
     wordInProgress.innerText = placeholderLetters.join("");
@@ -117,17 +117,18 @@ const updateGuessesRemaining = function (guess) {
     } else {
         message.innerText = `Great! The word does have the letter ${guess} innit`; 
     }
+
     if (remainingGuesses === 0) {
-        message.innerText = `GAME  OVER! The word was <span class="highlight">${word}</span>`;
+        message.innerHTML = `GAME  OVER! The word was <span class="highlight">${word}</span>`;
         startOver();
     } else if (remainingGuesses === 1) {
-        remainingGuessSpan.innerText = `${remainingGuesses} guess`;
+        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
-        remainingGuessSpan.innerText = `${remainingGuesses} guesses`;
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
     }
 };
 
-  const confirmWin = function () {
+  const checkIfWin = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
     message.classList.add("win");
     message.innerHTML = `<p class=highlight "You guessed the correct word, Yippie!</p>`;
@@ -143,12 +144,12 @@ const startOver = function () {
     playAgainButton.classList.remove("hide");
 };
 
-playAgainButton.addEventListener("click", function(){
+playAgainButton.addEventListener("click", function() {
 //rest values
 message.classList.remove("win");
 guessedLetters = [];
 remainingGuesses = 8;
-remainingGuessSpan.innerText =`${remainingGuesses} guesses`;
+remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
 guessedLettersElement.innerHTML = "";
 message.innerText = "";
 
